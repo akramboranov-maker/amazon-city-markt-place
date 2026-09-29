@@ -1,0 +1,6 @@
+{
+  "name": "AMAZON CITY",
+  "description": "Everything You Need, All in One City. Modern futuristic digital shopping metropolis with 100,000,000+ products across specialized shopping districts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
