@@ -12,6 +12,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart, buyNow, toggleFavorite, isFavorite, setSelectedProduct } = useShop();
   const [justAdded, setJustAdded] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
   const isFav = isFavorite(product.id);
 
@@ -115,13 +116,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       {/* "X+ bought in past month" */}
       {product.boughtPastMonth && (
-        <div className="text-[11px] text-slate-400 mb-2">
+        <div className="text-[11px] text-slate-400 mb-1.5">
           {product.boughtPastMonth >= 1000
             ? `${(product.boughtPastMonth / 1000).toFixed(1)}K+`
             : `${product.boughtPastMonth}+`}{' '}
           bought in past month
         </div>
       )}
+
+      {/* Amazon-style Color / Model Swatches */}
+      <div className="flex items-center gap-1.5 mb-2" onClick={(e) => e.stopPropagation()}>
+        {['#0f172a', '#0284c7', '#d97706', '#e11d48'].map((colorHex, idx) => (
+          <button
+            key={idx}
+            type="button"
+            aria-label={`Color swatch ${idx + 1}`}
+            onClick={() => setSelectedColorIndex(idx)}
+            className={`w-3.5 h-3.5 rounded-full transition-all cursor-pointer ${
+              selectedColorIndex === idx
+                ? 'ring-2 ring-amber-400 scale-110 shadow-sm shadow-amber-400/50'
+                : 'opacity-70 hover:opacity-100 hover:scale-105'
+            }`}
+            style={{ backgroundColor: colorHex }}
+          />
+        ))}
+        <span className="text-[10px] text-slate-500 font-mono ml-1">4 styles</span>
+      </div>
 
       {/* Amazon Price Layout: $XX.YY + List Price */}
       <div className="flex items-baseline gap-2 mb-2">

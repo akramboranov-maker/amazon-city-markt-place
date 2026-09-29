@@ -1,6 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { useShop } from '../context/ShopContext';
-import { productCatalog, DISTRICTS } from '../data/productEngine';
+import {
+  productCatalog,
+  DISTRICTS,
+  DRINKS_SPLASH_AD,
+  FOOD_FEATURE_IMAGE,
+  PHONE_TITANIUM_AD,
+  TOYS_GAMING_AD,
+} from '../data/productEngine';
 import { ProductCard } from './ProductCard';
 import { CityDistrict } from '../types';
 import {
@@ -13,6 +20,8 @@ import {
   Zap,
   ArrowUpDown,
   Search,
+  Sparkles,
+  ArrowRight,
 } from 'lucide-react';
 
 export const ProductGrid: React.FC = () => {
@@ -356,6 +365,78 @@ export const ProductGrid: React.FC = () => {
                 Page {queryResult.page} of {queryResult.totalPages}
               </div>
             </div>
+
+            {/* Amazon City Sponsored Commercial Ad Billboard */}
+            {page === 1 && !searchQuery && (
+              <div className="relative rounded-2xl overflow-hidden border border-amber-500/20 bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/40 p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 group">
+                <div className="space-y-2 z-10 max-w-lg">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      SPONSORED BRAND COMMERCIAL
+                    </span>
+                    <span className="text-[11px] text-slate-400">AMAZON CITY OFFICIAL STUDIO</span>
+                  </div>
+
+                  <h4 className="text-xl sm:text-2xl font-black text-white font-display leading-tight">
+                    {activeDistrict === 'drinks'
+                      ? 'CyberFuel & Botanical Elixirs — Cold-Pressed Nitro Refreshment'
+                      : activeDistrict === 'food'
+                      ? 'Gourmet Hokkaido Ramen & Swiss Cacao Truffles Collection'
+                      : activeDistrict === 'phones'
+                      ? 'Titanium Pro Flagships & Zero-Crease Holographic Foldables'
+                      : activeDistrict === 'gaming' || activeDistrict === 'toys'
+                      ? 'Next-Gen Battlestations & 3,450-Piece Orbital Space Kits'
+                      : 'Next-Gen AI Marketplace Specials — Prime Drone Delivery under 30 Mins'}
+                  </h4>
+
+                  <p className="text-xs text-slate-300 line-clamp-2">
+                    {activeDistrict === 'drinks'
+                      ? 'Direct from the botanical labs of District 1. Triple-filtered hydration with organic natural electrolytes.'
+                      : activeDistrict === 'food'
+                      ? 'Curated by Michelin-star artisans. Authentic Japanese sun-dried noodles & single-estate Ecuadorian chocolates.'
+                      : activeDistrict === 'phones'
+                      ? 'Engineered with titanium alloy and Snapdragon AI neural chips. 240Hz LTPO display technology.'
+                      : 'Discover high-demand consumer tech, toys, gaming rigs, and gourmet artisan food crafted for Amazon City.'}
+                  </p>
+
+                  <div className="flex items-center gap-3 pt-1">
+                    <button
+                      onClick={() => setFlashDealsOnly(true)}
+                      className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center gap-1.5 transition-transform group-hover:scale-105 cursor-pointer shadow-lg shadow-amber-400/20"
+                    >
+                      <span>Explore Commercial Deals</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="text-xs font-mono text-emerald-400 font-semibold">
+                      Extra 20% Off With City Prime
+                    </span>
+                  </div>
+                </div>
+
+                <div className="relative w-full md:w-64 h-40 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 shadow-inner">
+                  <img
+                    src={
+                      activeDistrict === 'drinks'
+                        ? DRINKS_SPLASH_AD
+                        : activeDistrict === 'food'
+                        ? FOOD_FEATURE_IMAGE
+                        : activeDistrict === 'phones'
+                        ? PHONE_TITANIUM_AD
+                        : activeDistrict === 'toys' || activeDistrict === 'gaming'
+                        ? TOYS_GAMING_AD
+                        : DRINKS_SPLASH_AD
+                    }
+                    alt="Commercial Ad"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-2 left-2 text-[9px] font-mono font-bold text-amber-300 bg-slate-950/80 px-1.5 py-0.5 rounded">
+                    4K STUDIO AD
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Empty State */}
             {queryResult.products.length === 0 ? (

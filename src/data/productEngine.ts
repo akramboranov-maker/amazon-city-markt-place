@@ -3,9 +3,13 @@ import { Product, CityDistrict, DistrictInfo, ProductReview } from '../types';
 // Real generated high-fidelity assets
 export const HERO_IMAGE = '/src/assets/images/hero_amazon_city_skyline_1790658220296.jpg';
 export const PHONE_FEATURE_IMAGE = '/src/assets/images/phone_city_flagship_1790658238705.jpg';
+export const PHONE_TITANIUM_AD = '/src/assets/images/phone_commercial_titanium_1790659483288.jpg';
 export const DRINKS_FEATURE_IMAGE = '/src/assets/images/drinks_city_showcase_1790658252042.jpg';
+export const DRINKS_SPLASH_AD = '/src/assets/images/drinks_commercial_splash_1790659466835.jpg';
 export const GAMING_FEATURE_IMAGE = '/src/assets/images/gaming_city_rig_1790658268825.jpg';
 export const TOY_FEATURE_IMAGE = '/src/assets/images/toy_city_modular_station_1790658746763.jpg';
+export const TOYS_GAMING_AD = '/src/assets/images/toys_gaming_epic_ad_1790659499282.jpg';
+export const FOOD_FEATURE_IMAGE = '/src/assets/images/food_city_commercial_ad_1790659446508.jpg';
 export const KEYBOARD_FEATURE_IMAGE = '/src/assets/images/keyboard_city_mechanical_1790658763783.jpg';
 export const MOUSE_FEATURE_IMAGE = '/src/assets/images/mouse_city_ultralight_1790658782896.jpg';
 export const MONITOR_FEATURE_IMAGE = '/src/assets/images/monitor_city_curved_1790658798295.jpg';
@@ -308,7 +312,7 @@ export class ProductCatalogEngine {
           specs: [{ label: 'Flavor', value: 'Yuzu Sparkling Citrus' }, { label: 'Active Matrix', value: 'Nootropic Focus Complex' }, { label: 'Pack Size', value: '12 Cans' }],
           tags: ['Energy Drink', 'Nootropic', 'Citrus', 'Sparkling'],
           gradient: 'from-cyan-500 via-blue-600 to-slate-950',
-          imageOverride: DRINKS_FEATURE_IMAGE,
+          imageOverride: DRINKS_SPLASH_AD,
           boughtPastMonth: 2000,
         },
         {
@@ -444,7 +448,7 @@ export class ProductCatalogEngine {
           ],
           tags: ['Gaming Phone', 'Titan', 'High Refresh', '512GB'],
           gradient: 'from-rose-600 via-violet-800 to-slate-950',
-          imageOverride: PHONE_FEATURE_IMAGE,
+          imageOverride: PHONE_TITANIUM_AD,
           boughtPastMonth: 800,
         },
         {
@@ -517,6 +521,7 @@ export class ProductCatalogEngine {
           specs: [{ label: 'Top Speed', value: '65 km/h' }, { label: 'Drive', value: '4WD Full Time' }],
           tags: ['RC Car', 'Remote Control', 'High Speed', 'All Terrain'],
           gradient: 'from-amber-500 via-red-600 to-slate-900',
+          imageOverride: TOYS_GAMING_AD,
           boughtPastMonth: 1200,
         },
         {
@@ -1070,7 +1075,11 @@ export class ProductCatalogEngine {
       ],
       food: [
         { title: 'Hokkaido Tonkotsu Artisan Ramen Box (8 Gourmet Bowls with Broth)', price: 39.50, oldPrice: 52.00, specs: [{ label: 'Servings', value: '8 Complete Bowls' }, { label: 'Noodles', value: 'Sun-Dried Craft Wheat' }] },
+        { title: 'Swiss Dark Cacao & Gold Leaf Truffles Gift Box (24 Pieces)', price: 28.95, oldPrice: 38.00, specs: [{ label: 'Origin', value: 'Single-Estate Criollo Cacao' }, { label: 'Pieces', value: '24 Artisan Truffles' }] },
         { title: 'Uji Ceremonial Single-Estate Stone Ground Matcha Can 100g', price: 34.00, oldPrice: 45.00, specs: [{ label: 'Harvest', value: 'First Spring Flush' }, { label: 'Net Weight', value: '100g Tin' }] },
+        { title: 'Black Truffle & Sea Salt Kettle Cooked Potato Crisps (6 Canisters)', price: 22.50, oldPrice: 29.99, specs: [{ label: 'Ingredients', value: 'Real Black Summer Truffle' }, { label: 'Pack', value: '6 x 150g' }] },
+        { title: 'Organic Mountain Raw Wildflower Honeycomb Jar (500g Glass)', price: 19.99, oldPrice: 26.00, specs: [{ label: 'Raw Honey', value: '100% Unpasteurized Comb' }, { label: 'Weight', value: '500g' }] },
+        { title: 'Belgian Speculoos Crunchy Biscuit Butter Spread (Pack of 2)', price: 14.80, oldPrice: 18.50, specs: [{ label: 'Texture', value: 'Caramelized Crunchy Bits' }, { label: 'Net Weight', value: '2 x 400g' }] },
       ]
     };
 
@@ -1098,7 +1107,7 @@ export class ProductCatalogEngine {
           stock: 25 + ((i * 37) % 180),
           description: `Certified authentic ${cItem.title} stored in Amazon City climate-controlled automated fulfillment depots.`,
           features: ['Amazon City Verified Genuine', 'Free Hyperloop Delivery', '30-Day Hassle-Free Returns'],
-          imageUrl: '',
+          imageUrl: dist === 'food' && i === 0 ? FOOD_FEATURE_IMAGE : '',
           imageFallbackGradient: distInfo.accentBg,
           badge: i === 0 ? 'Amazon’s Choice' : i === 1 ? '#1 Best Seller' : i % 3 === 0 ? 'Flash Deal' : undefined,
           isFlashDeal: i % 3 === 0,
